@@ -13,11 +13,11 @@ const buildDefaultRoutes = (app: string, resource: string) => ({
   [`/${app}/${resource}/:id`]: <AdminEditorModifyRoutePage app={app} resource={resource} />,
 });
 
-const adminRoutes = {
+const adminRoutes = {  // room & reviewer 추가하면 됨
   ...buildDefaultRoutes("proposals", "proposal"),
 };
 
-const homeRoutes = Object.keys(adminRoutes).filter((path) => !path.endsWith("/create") && !path.includes(":"));
+const homeRoutes = Object.keys(adminRoutes).filter((path) => !path.includes(":"));
 
 export const RegisteredRoutes: Record<string, ReactElement> = {
   "/": <HomePage routes={homeRoutes} />,
