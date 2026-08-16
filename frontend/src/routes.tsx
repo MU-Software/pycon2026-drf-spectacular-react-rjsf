@@ -13,9 +13,15 @@ const buildDefaultRoutes = (app: string, resource: string) => ({
   [`/${app}/${resource}/:id`]: <AdminEditorModifyRoutePage app={app} resource={resource} />,
 });
 
-export const RegisteredRoutes: Record<string, ReactElement> = {
-  "/": <HomePage />,
+const adminRoutes = {
   ...buildDefaultRoutes("proposals", "proposal"),
+};
+
+const homeRoutes = Object.keys(adminRoutes).filter((path) => !path.endsWith("/create") && !path.includes(":"));
+
+export const RegisteredRoutes: Record<string, ReactElement> = {
+  "/": <HomePage routes={homeRoutes} />,
+  ...adminRoutes,
   "*": <NotFoundPage />,
 };
 
